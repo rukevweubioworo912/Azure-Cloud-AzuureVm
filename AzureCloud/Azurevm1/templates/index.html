@@ -1,0 +1,322 @@
+from flask import Flask, Response, jsonify, request
+import os
+
+app = Flask(__name__)
+leaderboard = []
+
+@app.route('/')
+def game():
+    return Response('''<!DOCTYPE html>
+<html>
+<head>
+    <title>Space Shooter</title>
+    <meta charset="UTF-8">
+    <style>
+        body { 
+            margin: 0; 
+            background: #000; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            font-family: Arial; 
+            color: white; 
+        }
+        canvas { 
+            border: 2px solid #0ff; 
+            background: #001122; 
+        }
+        .container { text-align: center; }
+        .ui { 
+            position: absolute; 
+            top: 10px; 
+            left: 10px; 
+            z-index: 10; 
+        }
+        .ui div { margin: 5px 0; font-size: 18px; }
+        .game-over { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            background: rgba(0,0,0,0.9); 
+            padding: 20px; 
+            border: 2px solid #f00; 
+            border-radius: 10px; 
+            display: none; 
+        }
+        button { 
+            background: #f60; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            margin: 10px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-size: 16px; 
+        }
+        button:hover { background: #f80; }
+        input { 
+            padding: 8px; 
+            margin: 5px; 
+            border-radius: 5px; 
+            border: 1px solid #ccc; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas id="game" width="800" height="600"></canvas>
+        
+        <div class="ui">
+            <div>Score: <span id="score">0</span></div>
+            <div>Health: <span id="health">100</span></div>
+            <div>Level: <span id="level">1</span></div>
+        </div>
+        
+        <div class="game-over" id="gameOver">
+            <h2>Game Over!</h2>
+            <p>Score: <span id="finalScore">0</span></p>
+            <input type="text" id="playerName" placeholder="Your name">
+            <br>
+            <button onclick="saveScore()">Save Score</button>
+            <button onclick="restart()">Play Again</button>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <button onclick="start()">Start Game</button>
+            <button onclick="pause()">Pause</button>
+            <p>Controls: WASD to move, SPACE to shoot</p>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('game');
+        const ctx = canvas.getContext('2d');
+        
+        let gameRunning = false;
+        let gamePaused = false;
+        let score = 0;
+        let health = 100;
+        let level = 1;
+        
+        let player = { x: 375, y: 550, w: 50, h: 30, speed: 5 };
+        let bullets = [];
+        let enemies = [];
+        let keys = {};
+        
+        // Input
+        document.addEventListener('keydown', e => {
+            keys[e.key.toLowerCase()] = true;
+            if (e.key === ' ') {
+                e.preventDefault();
+                shoot();
+            }
+        });
+        document.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
+        
+        function start() {
+            gameRunning = true;
+            gamePaused = false;
+            score = 0;
+            health = 100;
+            level = 1;
+            bullets = [];
+            enemies = [];
+            player.x = 375;
+            player.y = 550;
+            document.getElementById('gameOver').style.display = 'none';
+            gameLoop();
+        }
+        
+        function pause() {
+            gamePaused = !gamePaused;
+            if (!gamePaused && gameRunning) gameLoop();
+        }
+        
+        function restart() {
+            start();
+        }
+        
+        function shoot() {
+            if (!gameRunning || gamePaused) return;
+            bullets.push({ x: player.x + 23, y: player.y, w: 4, h: 10, speed: 8 });
+        }
+        
+        function spawnEnemy() {
+            enemies.push({ 
+                x: Math.random() * 750, 
+                y: -30, 
+                w: 30, 
+                h: 30, 
+                speed: 2 + level * 0.5 
+            });
+        }
+        
+        function update() {
+            if (!gameRunning || gamePaused) return;
+            
+            // Move player
+            if (keys['a'] && player.x > 0) player.x -= player.speed;
+            if (keys['d'] && player.x < 750) player.x += player.speed;
+            if (keys['w'] && player.y > 0) player.y -= player.speed;
+            if (keys['s'] && player.y < 570) player.y += player.speed;
+            
+            // Move bullets
+            bullets.forEach((bullet, i) => {
+                bullet.y -= bullet.speed;
+                if (bullet.y < 0) bullets.splice(i, 1);
+            });
+            
+            // Move enemies
+            enemies.forEach((enemy, i) => {
+                enemy.y += enemy.speed;
+                if (enemy.y > 600) {
+                    enemies.splice(i, 1);
+                    health -= 10;
+                }
+            });
+            
+            // Check collisions
+            bullets.forEach((bullet, bi) => {
+                enemies.forEach((enemy, ei) => {
+                    if (bullet.x < enemy.x + enemy.w && 
+                        bullet.x + bullet.w > enemy.x &&
+                        bullet.y < enemy.y + enemy.h && 
+                        bullet.y + bullet.h > enemy.y) {
+                        bullets.splice(bi, 1);
+                        enemies.splice(ei, 1);
+                        score += 10;
+                    }
+                });
+            });
+            
+            // Player-enemy collision
+            enemies.forEach((enemy, i) => {
+                if (player.x < enemy.x + enemy.w && 
+                    player.x + player.w > enemy.x &&
+                    player.y < enemy.y + enemy.h && 
+                    player.y + player.h > enemy.y) {
+                    enemies.splice(i, 1);
+                    health -= 20;
+                }
+            });
+            
+            // Spawn enemies
+            if (Math.random() < 0.02 + level * 0.005) spawnEnemy();
+            
+            // Level up
+            if (score > level * 100) level++;
+            
+            // Game over
+            if (health <= 0) {
+                gameRunning = false;
+                document.getElementById('finalScore').textContent = score;
+                document.getElementById('gameOver').style.display = 'block';
+            }
+            
+            updateUI();
+        }
+        
+        function draw() {
+            // Clear screen
+            ctx.fillStyle = '#001122';
+            ctx.fillRect(0, 0, 800, 600);
+            
+            // Draw stars
+            for (let i = 0; i < 50; i++) {
+                ctx.fillStyle = 'white';
+                ctx.fillRect(Math.random() * 800, Math.random() * 600, 1, 1);
+            }
+            
+            if (!gameRunning) {
+                ctx.fillStyle = 'white';
+                ctx.font = '30px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('SPACE SHOOTER', 400, 250);
+                ctx.font = '16px Arial';
+                ctx.fillText('Click Start Game to begin!', 400, 300);
+                return;
+            }
+            
+            if (gamePaused) {
+                ctx.fillStyle = 'white';
+                ctx.font = '40px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('PAUSED', 400, 300);
+                return;
+            }
+            
+            // Draw player
+            ctx.fillStyle = '#0ff';
+            ctx.fillRect(player.x, player.y, player.w, player.h);
+            
+            // Draw bullets
+            ctx.fillStyle = '#ff0';
+            bullets.forEach(bullet => {
+                ctx.fillRect(bullet.x, bullet.y, bullet.w, bullet.h);
+            });
+            
+            // Draw enemies
+            ctx.fillStyle = '#f60';
+            enemies.forEach(enemy => {
+                ctx.fillRect(enemy.x, enemy.y, enemy.w, enemy.h);
+            });
+        }
+        
+        function gameLoop() {
+            if (gameRunning && !gamePaused) {
+                update();
+                draw();
+                requestAnimationFrame(gameLoop);
+            } else {
+                draw();
+            }
+        }
+        
+        function updateUI() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('health').textContent = Math.max(0, health);
+            document.getElementById('level').textContent = level;
+        }
+        
+        async function saveScore() {
+            const name = document.getElementById('playerName').value || 'Anonymous';
+            try {
+                await fetch('/api/score', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, score })
+                });
+                alert('Score saved!');
+            } catch (e) {
+                alert('Could not save score');
+            }
+        }
+        
+        // Start drawing
+        draw();
+    </script>
+</body>
+</html>''', content_type='text/html')
+
+@app.route('/api/score', methods=['POST'])
+def save_score():
+    global leaderboard
+    try:
+        data = request.get_json()
+        name = data.get('name', 'Anonymous')
+        score = data.get('score', 0)
+        leaderboard.append({'name': name, 'score': score})
+        leaderboard.sort(key=lambda x: x['score'], reverse=True)
+        leaderboard = leaderboard[:10]
+        return jsonify({'success': True})
+    except:
+        return jsonify({'success': False}), 500
+
+@app.route('/api/leaderboard')
+def get_leaderboard():
+    return jsonify(leaderboard)
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5000))) 
