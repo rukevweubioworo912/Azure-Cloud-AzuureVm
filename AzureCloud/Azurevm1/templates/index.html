@@ -1,12 +1,4 @@
-from flask import Flask, Response, jsonify, request
-import os
-
-app = Flask(__name__)
-leaderboard = []
-
-@app.route('/')
-def game():
-    return Response('''<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Space Shooter</title>
@@ -105,7 +97,6 @@ def game():
         let enemies = [];
         let keys = {};
         
-        // Input
         document.addEventListener('keydown', e => {
             keys[e.key.toLowerCase()] = true;
             if (e.key === ' ') {
@@ -156,19 +147,16 @@ def game():
         function update() {
             if (!gameRunning || gamePaused) return;
             
-            // Move player
             if (keys['a'] && player.x > 0) player.x -= player.speed;
             if (keys['d'] && player.x < 750) player.x += player.speed;
             if (keys['w'] && player.y > 0) player.y -= player.speed;
             if (keys['s'] && player.y < 570) player.y += player.speed;
             
-            // Move bullets
             bullets.forEach((bullet, i) => {
                 bullet.y -= bullet.speed;
                 if (bullet.y < 0) bullets.splice(i, 1);
             });
             
-            // Move enemies
             enemies.forEach((enemy, i) => {
                 enemy.y += enemy.speed;
                 if (enemy.y > 600) {
@@ -177,7 +165,6 @@ def game():
                 }
             });
             
-            // Check collisions
             bullets.forEach((bullet, bi) => {
                 enemies.forEach((enemy, ei) => {
                     if (bullet.x < enemy.x + enemy.w && 
@@ -191,7 +178,6 @@ def game():
                 });
             });
             
-            // Player-enemy collision
             enemies.forEach((enemy, i) => {
                 if (player.x < enemy.x + enemy.w && 
                     player.x + player.w > enemy.x &&
@@ -202,13 +188,10 @@ def game():
                 }
             });
             
-            // Spawn enemies
             if (Math.random() < 0.02 + level * 0.005) spawnEnemy();
             
-            // Level up
             if (score > level * 100) level++;
             
-            // Game over
             if (health <= 0) {
                 gameRunning = false;
                 document.getElementById('finalScore').textContent = score;
@@ -219,11 +202,9 @@ def game():
         }
         
         function draw() {
-            // Clear screen
             ctx.fillStyle = '#001122';
             ctx.fillRect(0, 0, 800, 600);
             
-            // Draw stars
             for (let i = 0; i < 50; i++) {
                 ctx.fillStyle = 'white';
                 ctx.fillRect(Math.random() * 800, Math.random() * 600, 1, 1);
@@ -247,21 +228,24 @@ def game():
                 return;
             }
             
-            // Draw player
             ctx.fillStyle = '#0ff';
             ctx.fillRect(player.x, player.y, player.w, player.h);
             
-            // Draw bullets
             ctx.fillStyle = '#ff0';
             bullets.forEach(bullet => {
                 ctx.fillRect(bullet.x, bullet.y, bullet.w, bullet.h);
             });
             
-            // Draw enemies
             ctx.fillStyle = '#f60';
             enemies.forEach(enemy => {
                 ctx.fillRect(enemy.x, enemy.y, enemy.w, enemy.h);
             });
+        }
+        
+        function updateUI() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('health').textContent = health;
+            document.getElementById('level').textContent = level;
         }
         
         function gameLoop() {
@@ -269,54 +253,18 @@ def game():
                 update();
                 draw();
                 requestAnimationFrame(gameLoop);
-            } else {
-                draw();
             }
         }
         
-        function updateUI() {
-            document.getElementById('score').textContent = score;
-            document.getElementById('health').textContent = Math.max(0, health);
-            document.getElementById('level').textContent = level;
-        }
-        
-        async function saveScore() {
+        function saveScore() {
             const name = document.getElementById('playerName').value || 'Anonymous';
-            try {
-                await fetch('/api/score', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, score })
-                });
-                alert('Score saved!');
-            } catch (e) {
-                alert('Could not save score');
-            }
+            fetch('/save_score', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, score })
+            }).then(res => res.json())
+              .then(data => alert('Score saved!'));
         }
-        
-        // Start drawing
-        draw();
     </script>
 </body>
-</html>''', content_type='text/html')
-
-@app.route('/api/score', methods=['POST'])
-def save_score():
-    global leaderboard
-    try:
-        data = request.get_json()
-        name = data.get('name', 'Anonymous')
-        score = data.get('score', 0)
-        leaderboard.append({'name': name, 'score': score})
-        leaderboard.sort(key=lambda x: x['score'], reverse=True)
-        leaderboard = leaderboard[:10]
-        return jsonify({'success': True})
-    except:
-        return jsonify({'success': False}), 500
-
-@app.route('/api/leaderboard')
-def get_leaderboard():
-    return jsonify(leaderboard)
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5000))) 
+</html>
