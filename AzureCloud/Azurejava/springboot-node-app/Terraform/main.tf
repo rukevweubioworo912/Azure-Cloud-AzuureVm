@@ -1,45 +1,97 @@
-# Resource Group
+
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
   location = var.location
 }
 
-# App Service Plan
-resource "azurerm_app_service_plan" "plan" {
-  name                = var.app_service_plan_name
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  kind                = "Linux"
-  reserved            = true
-  sku {
-    tier = "Basic"
-    size = var.app_service_plan_sku
+# Virtual Network
+resource "azurerm_virtual_network" "vnet" {
+  name                = "${var.resource_group_name}-vnet"
+  address_space       = ["10.0.0.0/16"]
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+}
+
+# Subnet
+resource "azurerm_subnet" "subnet" {
+  name                 = "${var.resource_group_name}-subnet"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = ["10.0.1.0/24"]
+}
+
+# Public IP
+resource "azurerm_public_ip" "vm_public_ip" {
+  name                = "${var.resource_group_name}-pip"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  allocation_method   = "Static"
+}
+
+# Network Interface
+resource "azurerm_network_interface" "nic" {
+  name                = "${var.resource_group_name}-nic"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.subnet.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id           = azurerm_public_ip.vm_public_ip.id
   }
 }
 
-# Azure Container Registry
-resource "azurerm_container_registry" "acr" {
-  name                = var.acr_name
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  sku                 = var.acr_sku
-  admin_enabled       = true
+# Network Security Group
+resource "azurerm_network_security_group" "nsg" {
+  name                = "${var.resource_group_name}-nsg"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  security_rule {
+    name                       = "SSH"
+    priority                   = 1001
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range           = "*"
+    destination_port_range      = "22"
+    source_address_prefix       = "*"
+    destination_address_prefix  = "*"
+  }
 }
 
-# App Service
-resource "azurerm_app_service" "app" {
-  name                = var.app_service_name
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  app_service_plan_id = azurerm_app_service_plan.plan.id
+# Associate NSG with Subnet
+resource "azurerm_subnet_network_security_group_association" "subnet_nsg" {
+  subnet_id                 = azurerm_subnet.subnet.id
+  network_security_group_id = azurerm_network_security_group.nsg.id
+}
 
-  site_config {
-    linux_fx_version = "DOCKER|${azurerm_container_registry.acr.login_server}/${var.docker_image_name}:${var.docker_image_tag}"
+# Linux Virtual Machine
+resource "azurerm_linux_virtual_machine" "vm" {
+  name                = var.vm_name
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  size                = var.vm_size
+  admin_username      = var.admin_username
+  admin_password      = var.admin_password
+  network_interface_ids = [
+    azurerm_network_interface.nic.id,
+  ]
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
   }
 
-  app_settings = {
-    "DOCKER_REGISTRY_SERVER_URL"      = "https://${azurerm_container_registry.acr.login_server}"
-    "DOCKER_REGISTRY_SERVER_USERNAME" = azurerm_container_registry.acr.admin_username
-    "DOCKER_REGISTRY_SERVER_PASSWORD" = azurerm_container_registry.acr.admin_password
-  }
+ source_image_reference {
+  publisher = "Canonical"
+  offer     = "0001-com-ubuntu-server-jammy"
+  sku       = "22_04-lts"
+  version   = "latest"
+}
+
+
+  computer_name                  = var.vm_name
+  disable_password_authentication = false
 }
