@@ -61,11 +61,19 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: ./terraform
+        working-directory: ./AzureCloud/Azurejava/springboot-node-app/terraform
+
+      - name: Terraform Init
+        run: terraform validate 
+        working-directory: ./AzureCloud/Azurejava/springboot-node-app/terraform
+
+      - name: Terraform Init
+        run: terraform plan
+        working-directory: ./AzureCloud/Azurejava/springboot-node-app/terraform
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
-        working-directory: ./terraform
+        working-directory: ./AzureCloud/Azurejava/springboot-node-app/terraform
 
   stream-logs:
     runs-on: ubuntu-latest
