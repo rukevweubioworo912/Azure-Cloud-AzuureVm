@@ -49,16 +49,24 @@ jobs:
 
   terraform-deploy:
     runs-on: ubuntu-latest
+    needs: [build-docker]
     defaults:
       run:
         working-directory: AzureCloud/Azurejava/springboot-node-app/Terraform
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: list the diretory  of teh file 
+        
+      - name: list the diretory  of the file 
         run: |
          ls -la 
          pwd
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.6.0
+
 
       - name: Terraform Init
         run: terraform init
