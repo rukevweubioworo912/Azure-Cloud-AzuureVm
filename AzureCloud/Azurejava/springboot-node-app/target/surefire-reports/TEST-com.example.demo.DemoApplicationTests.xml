@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.example.demo.DemoApplicationTests" time="3.721" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/workspaces/Azure-Cloud-AzuureVm/AzureCloud/Azurejava/springboot-node-app/target/test-classes:/workspaces/Azure-Cloud-AzuureVm/AzureCloud/Azurejava/springboot-node-app/target/classes:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.2.1/spring-boot-starter-web-3.2.1.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-starter/3.2.1/spring-boot-starter-3.2.1.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot/3.2.1/spring-boot-3.2.1.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.2.1/spring-boot-autoconfigure-3.2.1.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.2.1/spring-boot-starter-logging-3.2.1.jar:/home/codespace/.m2/repository/ch/qos/logback/logback-classic/1.4.14/logback-classic-1.4.14.jar:/home/codespace/.m2/repository/ch/qos/logback/logback-core/1.4.14/logback-core-1.4.14.jar:/home/codespace/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.21.1/log4j-to-slf4j-2.21.1.jar:/home/codespace/.m2/repository/org/apache/logging/log4j/log4j-api/2.21.1/log4j-api-2.21.1.jar:/home/codespace/.m2/repository/org/slf4j/jul-to-slf4j/2.0.9/jul-to-slf4j-2.0.9.jar:/home/codespace/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/home/codespace/.m2/repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.2.1/spring-boot-starter-json-3.2.1.jar:/home/codespace/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.3/jackson-databind-2.15.3.jar:/home/codespace/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.3/jackson-annotations-2.15.3.jar:/home/codespace/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.3/jackson-core-2.15.3.jar:/home/codespace/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.15.3/jackson-datatype-jdk8-2.15.3.jar:/home/codespace/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.15.3/jackson-datatype-jsr310-2.15.3.jar:/home/codespace/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.15.3/jackson-module-parameter-names-2.15.3.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.2.1/spring-boot-starter-tomcat-3.2.1.jar:/home/codespace/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.17/tomcat-embed-core-10.1.17.jar:/home/codespace/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.17/tomcat-embed-el-10.1.17.jar:/home/codespace/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.17/tomcat-embed-websocket-10.1.17.jar:/home/codespace/.m2/repository/org/springframework/spring-web/6.1.2/spring-web-6.1.2.jar:/home/codespace/.m2/repository/org/springframework/spring-beans/6.1.2/spring-beans-6.1.2.jar:/home/codespace/.m2/repository/io/micrometer/micrometer-observation/1.12.1/micrometer-observation-1.12.1.jar:/home/codespace/.m2/repository/io/micrometer/micrometer-commons/1.12.1/micrometer-commons-1.12.1.jar:/home/codespace/.m2/repository/org/springframework/spring-webmvc/6.1.2/spring-webmvc-6.1.2.jar:/home/codespace/.m2/repository/org/springframework/spring-aop/6.1.2/spring-aop-6.1.2.jar:/home/codespace/.m2/repository/org/springframework/spring-context/6.1.2/spring-context-6.1.2.jar:/home/codespace/.m2/repository/org/springframework/spring-expression/6.1.2/spring-expression-6.1.2.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.2.1/spring-boot-starter-test-3.2.1.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-test/3.2.1/spring-boot-test-3.2.1.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.2.1/spring-boot-test-autoconfigure-3.2.1.jar:/home/codespace/.m2/repository/com/jayway/jsonpath/json-path/2.8.0/json-path-2.8.0.jar:/home/codespace/.m2/repository/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar:/home/codespace/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.1/jakarta.xml.bind-api-4.0.1.jar:/home/codespace/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.2/jakarta.activation-api-2.1.2.jar:/home/codespace/.m2/repository/net/minidev/json-smart/2.5.0/json-smart-2.5.0.jar:/home/codespace/.m2/repository/net/minidev/accessors-smart/2.5.0/accessors-smart-2.5.0.jar:/home/codespace/.m2/repository/org/ow2/asm/asm/9.3/asm-9.3.jar:/home/codespace/.m2/repository/org/assertj/assertj-core/3.24.2/assertj-core-3.24.2.jar:/home/codespace/.m2/repository/net/bytebuddy/byte-buddy/1.14.10/byte-buddy-1.14.10.jar:/home/codespace/.m2/repository/org/awaitility/awaitility/4.2.0/awaitility-4.2.0.jar:/home/codespace/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.1/junit-jupiter-5.10.1.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.1/junit-jupiter-api-5.10.1.jar:/home/codespace/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-commons/1.10.1/junit-platform-commons-1.10.1.jar:/home/codespace/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.1/junit-jupiter-params-5.10.1.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.1/junit-jupiter-engine-5.10.1.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-engine/1.10.1/junit-platform-engine-1.10.1.jar:/home/codespace/.m2/repository/org/mockito/mockito-core/5.7.0/mockito-core-5.7.0.jar:/home/codespace/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.10/byte-buddy-agent-1.14.10.jar:/home/codespace/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/home/codespace/.m2/repository/org/mockito/mockito-junit-jupiter/5.7.0/mockito-junit-jupiter-5.7.0.jar:/home/codespace/.m2/repository/org/skyscreamer/jsonassert/1.5.1/jsonassert-1.5.1.jar:/home/codespace/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/home/codespace/.m2/repository/org/springframework/spring-core/6.1.2/spring-core-6.1.2.jar:/home/codespace/.m2/repository/org/springframework/spring-jcl/6.1.2/spring-jcl-6.1.2.jar:/home/codespace/.m2/repository/org/springframework/spring-test/6.1.2/spring-test-6.1.2.jar:/home/codespace/.m2/repository/org/xmlunit/xmlunit-core/2.9.1/xmlunit-core-2.9.1.jar:"/>
+    <property name="java.vm.vendor" value="Ubuntu"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="catalina.useNaming" value="false"/>
+    <property name="java.vendor.url" value="https://ubuntu.com/"/>
+    <property name="user.timezone" value="Etc/UTC"/>
+    <property name="os.name" value="Linux"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-17-openjdk-amd64/lib"/>
+    <property name="sun.java.command" value="/workspaces/Azure-Cloud-AzuureVm/AzureCloud/Azurejava/springboot-node-app/target/surefire/surefirebooter-20250928085615977_3.jar /workspaces/Azure-Cloud-AzuureVm/AzureCloud/Azurejava/springboot-node-app/target/surefire 2025-09-28T08-56-15_856-jvmRun1 surefire-20250928085615977_1tmp surefire_0-20250928085615977_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/workspaces/Azure-Cloud-AzuureVm/AzureCloud/Azurejava/springboot-node-app/target/test-classes:/workspaces/Azure-Cloud-AzuureVm/AzureCloud/Azurejava/springboot-node-app/target/classes:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.2.1/spring-boot-starter-web-3.2.1.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-starter/3.2.1/spring-boot-starter-3.2.1.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot/3.2.1/spring-boot-3.2.1.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.2.1/spring-boot-autoconfigure-3.2.1.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.2.1/spring-boot-starter-logging-3.2.1.jar:/home/codespace/.m2/repository/ch/qos/logback/logback-classic/1.4.14/logback-classic-1.4.14.jar:/home/codespace/.m2/repository/ch/qos/logback/logback-core/1.4.14/logback-core-1.4.14.jar:/home/codespace/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.21.1/log4j-to-slf4j-2.21.1.jar:/home/codespace/.m2/repository/org/apache/logging/log4j/log4j-api/2.21.1/log4j-api-2.21.1.jar:/home/codespace/.m2/repository/org/slf4j/jul-to-slf4j/2.0.9/jul-to-slf4j-2.0.9.jar:/home/codespace/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/home/codespace/.m2/repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.2.1/spring-boot-starter-json-3.2.1.jar:/home/codespace/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.3/jackson-databind-2.15.3.jar:/home/codespace/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.3/jackson-annotations-2.15.3.jar:/home/codespace/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.3/jackson-core-2.15.3.jar:/home/codespace/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.15.3/jackson-datatype-jdk8-2.15.3.jar:/home/codespace/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.15.3/jackson-datatype-jsr310-2.15.3.jar:/home/codespace/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.15.3/jackson-module-parameter-names-2.15.3.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.2.1/spring-boot-starter-tomcat-3.2.1.jar:/home/codespace/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.17/tomcat-embed-core-10.1.17.jar:/home/codespace/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.17/tomcat-embed-el-10.1.17.jar:/home/codespace/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.17/tomcat-embed-websocket-10.1.17.jar:/home/codespace/.m2/repository/org/springframework/spring-web/6.1.2/spring-web-6.1.2.jar:/home/codespace/.m2/repository/org/springframework/spring-beans/6.1.2/spring-beans-6.1.2.jar:/home/codespace/.m2/repository/io/micrometer/micrometer-observation/1.12.1/micrometer-observation-1.12.1.jar:/home/codespace/.m2/repository/io/micrometer/micrometer-commons/1.12.1/micrometer-commons-1.12.1.jar:/home/codespace/.m2/repository/org/springframework/spring-webmvc/6.1.2/spring-webmvc-6.1.2.jar:/home/codespace/.m2/repository/org/springframework/spring-aop/6.1.2/spring-aop-6.1.2.jar:/home/codespace/.m2/repository/org/springframework/spring-context/6.1.2/spring-context-6.1.2.jar:/home/codespace/.m2/repository/org/springframework/spring-expression/6.1.2/spring-expression-6.1.2.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.2.1/spring-boot-starter-test-3.2.1.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-test/3.2.1/spring-boot-test-3.2.1.jar:/home/codespace/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.2.1/spring-boot-test-autoconfigure-3.2.1.jar:/home/codespace/.m2/repository/com/jayway/jsonpath/json-path/2.8.0/json-path-2.8.0.jar:/home/codespace/.m2/repository/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar:/home/codespace/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.1/jakarta.xml.bind-api-4.0.1.jar:/home/codespace/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.2/jakarta.activation-api-2.1.2.jar:/home/codespace/.m2/repository/net/minidev/json-smart/2.5.0/json-smart-2.5.0.jar:/home/codespace/.m2/repository/net/minidev/accessors-smart/2.5.0/accessors-smart-2.5.0.jar:/home/codespace/.m2/repository/org/ow2/asm/asm/9.3/asm-9.3.jar:/home/codespace/.m2/repository/org/assertj/assertj-core/3.24.2/assertj-core-3.24.2.jar:/home/codespace/.m2/repository/net/bytebuddy/byte-buddy/1.14.10/byte-buddy-1.14.10.jar:/home/codespace/.m2/repository/org/awaitility/awaitility/4.2.0/awaitility-4.2.0.jar:/home/codespace/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.1/junit-jupiter-5.10.1.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.1/junit-jupiter-api-5.10.1.jar:/home/codespace/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-commons/1.10.1/junit-platform-commons-1.10.1.jar:/home/codespace/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.1/junit-jupiter-params-5.10.1.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.1/junit-jupiter-engine-5.10.1.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-engine/1.10.1/junit-platform-engine-1.10.1.jar:/home/codespace/.m2/repository/org/mockito/mockito-core/5.7.0/mockito-core-5.7.0.jar:/home/codespace/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.10/byte-buddy-agent-1.14.10.jar:/home/codespace/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/home/codespace/.m2/repository/org/mockito/mockito-junit-jupiter/5.7.0/mockito-junit-jupiter-5.7.0.jar:/home/codespace/.m2/repository/org/skyscreamer/jsonassert/1.5.1/jsonassert-1.5.1.jar:/home/codespace/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/home/codespace/.m2/repository/org/springframework/spring-core/6.1.2/spring-core-6.1.2.jar:/home/codespace/.m2/repository/org/springframework/spring-jcl/6.1.2/spring-jcl-6.1.2.jar:/home/codespace/.m2/repository/org/springframework/spring-test/6.1.2/spring-test-6.1.2.jar:/home/codespace/.m2/repository/org/xmlunit/xmlunit-core/2.9.1/xmlunit-core-2.9.1.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/home/codespace"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-07-15"/>
+    <property name="java.home" value="/usr/lib/jvm/java-17-openjdk-amd64"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/workspaces/Azure-Cloud-AzuureVm/AzureCloud/Azurejava/springboot-node-app"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="FILE_LOG_CHARSET" value="UTF-8"/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="surefire.real.class.path" value="/workspaces/Azure-Cloud-AzuureVm/AzureCloud/Azurejava/springboot-node-app/target/surefire/surefirebooter-20250928085615977_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.16+8-Ubuntu-0ubuntu124.04.1"/>
+    <property name="user.name" value="codespace"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="6.8.0-1030-azure"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="/home/codespace/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-17"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="catalina.home" value="/tmp/tomcat.0.7930079220447113884"/>
+    <property name="java.version" value="17.0.16"/>
+    <property name="user.dir" value="/workspaces/Azure-Cloud-AzuureVm/AzureCloud/Azurejava/springboot-node-app"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="PID" value="83889"/>
+    <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
+    <property name="catalina.base" value="/tmp/tomcat.0.7930079220447113884"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Ubuntu"/>
+    <property name="java.vm.version" value="17.0.16+8-Ubuntu-0ubuntu124.04.1"/>
+    <property name="java.specification.maintenance.version" value="1"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="contextLoads" classname="com.example.demo.DemoApplicationTests" time="1.031">
+    <system-out><![CDATA[08:56:16.837 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.demo.DemoApplicationTests]: DemoApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+08:56:16.960 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.demo.DemoApplication for test class com.example.demo.DemoApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.1)
+
+2025-09-28T08:56:17.586Z  INFO 83889 --- [           main] com.example.demo.DemoApplicationTests    : Starting DemoApplicationTests using Java 17.0.16 with PID 83889 (started by codespace in /workspaces/Azure-Cloud-AzuureVm/AzureCloud/Azurejava/springboot-node-app)
+2025-09-28T08:56:17.592Z  INFO 83889 --- [           main] com.example.demo.DemoApplicationTests    : No active profile set, falling back to 1 default profile: "default"
+2025-09-28T08:56:18.833Z  INFO 83889 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 0 (http)
+2025-09-28T08:56:18.845Z  INFO 83889 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-28T08:56:18.846Z  INFO 83889 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2025-09-28T08:56:18.908Z  INFO 83889 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-28T08:56:18.909Z  INFO 83889 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1274 ms
+2025-09-28T08:56:19.044Z  INFO 83889 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2025-09-28T08:56:19.323Z  INFO 83889 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 39015 (http) with context path ''
+2025-09-28T08:56:19.335Z  INFO 83889 --- [           main] com.example.demo.DemoApplicationTests    : Started DemoApplicationTests in 2.207 seconds (process running for 3.279)
+2025-09-28T08:56:20.259Z  INFO 83889 --- [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-28T08:56:20.259Z  INFO 83889 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-28T08:56:20.261Z  INFO 83889 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Space Shooter</title>
+    <meta charset="UTF-8">
+    <style>
+        body { 
+            margin: 0; 
+            background: #000; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            font-family: Arial; 
+            color: white; 
+        }
+        canvas { 
+            border: 2px solid #0ff; 
+            background: #001122; 
+        }
+        .container { text-align: center; }
+        .ui { 
+            position: absolute; 
+            top: 10px; 
+            left: 10px; 
+            z-index: 10; 
+        }
+        .ui div { margin: 5px 0; font-size: 18px; }
+        .game-over { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            background: rgba(0,0,0,0.9); 
+            padding: 20px; 
+            border: 2px solid #f00; 
+            border-radius: 10px; 
+            display: none; 
+        }
+        button { 
+            background: #f60; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            margin: 10px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-size: 16px; 
+        }
+        button:hover { background: #f80; }
+        input { 
+            padding: 8px; 
+            margin: 5px; 
+            border-radius: 5px; 
+            border: 1px solid #ccc; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas id="game" width="800" height="600"></canvas>
+        
+        <div class="ui">
+            <div>Score: <span id="score">0</span></div>
+            <div>Health: <span id="health">100</span></div>
+            <div>Level: <span id="level">1</span></div>
+        </div>
+        
+        <div class="game-over" id="gameOver">
+            <h2>Game Over!</h2>
+            <p>Score: <span id="finalScore">0</span></p>
+            <input type="text" id="playerName" placeholder="Your name">
+            <br>
+            <button onclick="saveScore()">Save Score</button>
+            <button onclick="restart()">Play Again</button>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <button onclick="start()">Start Game</button>
+            <button onclick="pause()">Pause</button>
+            <p>Controls: WASD to move, SPACE to shoot</p>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('game');
+        const ctx = canvas.getContext('2d');
+        
+        let gameRunning = false;
+        let gamePaused = false;
+        let score = 0;
+        let health = 100;
+        let level = 1;
+        
+        let player = { x: 375, y: 550, w: 50, h: 30, speed: 5 };
+        let bullets = [];
+        let enemies = [];
+        let keys = {};
+        
+        document.addEventListener('keydown', e => {
+            keys[e.key.toLowerCase()] = true;
+            if (e.key === ' ') {
+                e.preventDefault();
+                shoot();
+            }
+        });
+        document.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
+        
+        function start() {
+            gameRunning = true;
+            gamePaused = false;
+            score = 0;
+            health = 100;
+            level = 1;
+            bullets = [];
+            enemies = [];
+            player.x = 375;
+            player.y = 550;
+            document.getElementById('gameOver').style.display = 'none';
+            gameLoop();
+        }
+        
+        function pause() {
+            gamePaused = !gamePaused;
+            if (!gamePaused && gameRunning) gameLoop();
+        }
+        
+        function restart() {
+            start();
+        }
+        
+        function shoot() {
+            if (!gameRunning || gamePaused) return;
+            bullets.push({ x: player.x + 23, y: player.y, w: 4, h: 10, speed: 8 });
+        }
+        
+        function spawnEnemy() {
+            enemies.push({ 
+                x: Math.random() * 750, 
+                y: -30, 
+                w: 30, 
+                h: 30, 
+                speed: 2 + level * 0.5 
+            });
+        }
+        
+        function update() {
+            if (!gameRunning || gamePaused) return;
+            
+            if (keys['a'] && player.x > 0) player.x -= player.speed;
+            if (keys['d'] && player.x < 750) player.x += player.speed;
+            if (keys['w'] && player.y > 0) player.y -= player.speed;
+            if (keys['s'] && player.y < 570) player.y += player.speed;
+            
+            bullets.forEach((bullet, i) => {
+                bullet.y -= bullet.speed;
+                if (bullet.y < 0) bullets.splice(i, 1);
+            });
+            
+            enemies.forEach((enemy, i) => {
+                enemy.y += enemy.speed;
+                if (enemy.y > 600) {
+                    enemies.splice(i, 1);
+                    health -= 10;
+                }
+            });
+            
+            bullets.forEach((bullet, bi) => {
+                enemies.forEach((enemy, ei) => {
+                    if (bullet.x < enemy.x + enemy.w && 
+                        bullet.x + bullet.w > enemy.x &&
+                        bullet.y < enemy.y + enemy.h && 
+                        bullet.y + bullet.h > enemy.y) {
+                        bullets.splice(bi, 1);
+                        enemies.splice(ei, 1);
+                        score += 10;
+                    }
+                });
+            });
+            
+            enemies.forEach((enemy, i) => {
+                if (player.x < enemy.x + enemy.w && 
+                    player.x + player.w > enemy.x &&
+                    player.y < enemy.y + enemy.h && 
+                    player.y + player.h > enemy.y) {
+                    enemies.splice(i, 1);
+                    health -= 20;
+                }
+            });
+            
+            if (Math.random() < 0.02 + level * 0.005) spawnEnemy();
+            
+            if (score > level * 100) level++;
+            
+            if (health <= 0) {
+                gameRunning = false;
+                document.getElementById('finalScore').textContent = score;
+                document.getElementById('gameOver').style.display = 'block';
+            }
+            
+            updateUI();
+        }
+        
+        function draw() {
+            ctx.fillStyle = '#001122';
+            ctx.fillRect(0, 0, 800, 600);
+            
+            for (let i = 0; i < 50; i++) {
+                ctx.fillStyle = 'white';
+                ctx.fillRect(Math.random() * 800, Math.random() * 600, 1, 1);
+            }
+            
+            if (!gameRunning) {
+                ctx.fillStyle = 'white';
+                ctx.font = '30px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('SPACE SHOOTER', 400, 250);
+                ctx.font = '16px Arial';
+                ctx.fillText('Click Start Game to begin!', 400, 300);
+                return;
+            }
+            
+            if (gamePaused) {
+                ctx.fillStyle = 'white';
+                ctx.font = '40px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('PAUSED', 400, 300);
+                return;
+            }
+            
+            ctx.fillStyle = '#0ff';
+            ctx.fillRect(player.x, player.y, player.w, player.h);
+            
+            ctx.fillStyle = '#ff0';
+            bullets.forEach(bullet => {
+                ctx.fillRect(bullet.x, bullet.y, bullet.w, bullet.h);
+            });
+            
+            ctx.fillStyle = '#f60';
+            enemies.forEach(enemy => {
+                ctx.fillRect(enemy.x, enemy.y, enemy.w, enemy.h);
+            });
+        }
+        
+        function updateUI() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('health').textContent = health;
+            document.getElementById('level').textContent = level;
+        }
+        
+        function gameLoop() {
+            if (gameRunning && !gamePaused) {
+                update();
+                draw();
+                requestAnimationFrame(gameLoop);
+            }
+        }
+        
+        function saveScore() {
+            const name = document.getElementById('playerName').value || 'Anonymous';
+            fetch('/save_score', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, score })
+            }).then(res => res.json())
+              .then(data => alert('Score saved!'));
+        }
+    </script>
+</body>
+</html>
+
+]]></system-out>
+  </testcase>
+</testsuite>
