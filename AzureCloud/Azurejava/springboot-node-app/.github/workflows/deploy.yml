@@ -21,6 +21,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      
+      - name: list all the file 
+        run:
+          ls -la 
+
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
