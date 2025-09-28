@@ -9,7 +9,7 @@ env:
   ACR_NAME: springbootnodeacr
   APP_NAME: springboot-node-app
   RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
-  LOCATION: eastus
+  LOCATION: westus
   IMAGE_TAG: latest
 
 jobs:
@@ -32,18 +32,16 @@ jobs:
         run: mvn clean package -DskipTests
 
       - name: Build Docker Image
-        run: |
-          docker build -t $ACR_NAME.azurecr.io/$APP_NAME:$IMAGE_TAG .
+        run: docker build -t $ACR_NAME.azurecr.io/$APP_NAME:$IMAGE_TAG .
 
       - name: Log in to Azure Container Registry
-        run: |
-          echo ${{ secrets.ACR_PASSWORD }} | docker login $ACR_NAME.azurecr.io -u ${{ secrets.ACR_USERNAME }} --password-stdin
+        run: echo ${{ secrets.ACR_PASSWORD }} | docker login $ACR_NAME.azurecr.io -u ${{ secrets.ACR_USERNAME }} --password-stdin
 
       - name: Push Docker Image to ACR
         run: docker push $ACR_NAME.azurecr.io/$APP_NAME:$IMAGE_TAG
 
       - name: Push Docker Image to Docker Hub (optional)
-        # if: ${{ secrets.DOCKER_USERNAME != '' }}
+        if: ${{ secrets.DOCKER_USERNAME != '' }}
         run: |
           docker tag $ACR_NAME.azurecr.io/$APP_NAME:$IMAGE_TAG ${{ secrets.DOCKER_USERNAME }}/$APP_NAME:$IMAGE_TAG
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
@@ -51,19 +49,25 @@ jobs:
 
   terraform-deploy:
     runs-on: ubuntu-latest
-    needs: build-docker
+    defaults:
+      run:
+        working-directory: AzureCloud/Azurejava/springboot-node-app/Terraform
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: list the diretory  of teh file 
+        run: |
+         ls -la 
+         pwd
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+      - name: Terraform Init
+        run: terraform init
 
-      - run: terraform init
-        working-directory: ./terraform
+      - name: Terraform Plan
+        run: terraform plan
 
-      - run: terraform apply -auto-approve
-        working-directory: ./terraform
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
 
   stream-logs:
     runs-on: ubuntu-latest
