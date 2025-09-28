@@ -1,39 +1,53 @@
+# Resource group
 variable "resource_group_name" {
-  type = string
+  description = "Name of the Azure Resource Group"
+  type        = string
 }
 
 variable "location" {
-  type    = string
-  default = "eastus"
+  description = "Azure region"
+  type        = string
+  default     = "westus"
 }
 
-variable "acr_name" {
-  type = string
-}
-
-variable "acr_sku" {
-  type    = string
-  default = "Basic"
-}
-
+# App Service Plan
 variable "app_service_plan_name" {
-  type = string
+  description = "Name of the App Service Plan"
+  type        = string
 }
 
 variable "app_service_plan_sku" {
-  type    = string
-  default = "B1"
+  description = "SKU for the App Service Plan"
+  type        = string
+  default     = "B1"
 }
 
+# App Service
 variable "app_service_name" {
-  type = string
+  description = "Name of the App Service"
+  type        = string
 }
 
+# Container Registry
+variable "acr_name" {
+  description = "Name of the Azure Container Registry"
+  type        = string
+}
+
+variable "acr_sku" {
+  description = "SKU of the Azure Container Registry"
+  type        = string
+  default     = "Basic"
+}
+
+# Docker image
 variable "docker_image_name" {
-  type = string
+  description = "Name of the Docker image"
+  type        = string
 }
 
 variable "docker_image_tag" {
-  type    = string
-  default = "latest"
+  description = "Tag of the Docker image"
+  type        = string
+  default     = "latest"
 }
