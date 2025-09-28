@@ -64,16 +64,25 @@ jobs:
         uses: hashicorp/setup-terraform@v2
 
       - name: Terraform Init
-        run: terraform init
+        run: |
+          cd AzureCloud/Azurejava/springboot-node-app/terraform
+          terraform init
+
 
       - name: Terraform Validate
-        run: terraform validate
+        run: |
+          cd AzureCloud/Azurejava/springboot-node-app/terraform
+          terraform validate 
 
       - name: Terraform Plan
-        run: terraform plan
+        run: |
+           cd AzureCloud/Azurejava/springboot-node-app/terraform
+            terraform plan 
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: |
+          cd AzureCloud/Azurejava/springboot-node-app/terraform
+          terraform apply -auto-approve
       
 
       
